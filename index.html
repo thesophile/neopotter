@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeoPotter - Premium 3D Printed Planters</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #1f2937;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin: 20px;
+            padding: 20px 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #374151;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .cart-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cart-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cart-btn:hover::before {
+            left: 100%;
+        }
+
+        .cart-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .cart-count {
+            background: #ef4444;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            margin-left: 8px;
+        }
+
+        main {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin: 20px;
+            padding: 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #6b7280;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(45deg, #f3f4f6, #e5e7eb);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+        }
+
+        .product-info {
+            padding: 25px;
+        }
+
+        .product-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #1f2937;
+        }
+
+        .product-description {
+            color: #6b7280;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .add-to-cart:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            display: none;
+        }
+
+        .cart-panel {
+            position: fixed;
+            right: -400px;
+            top: 0;
+            width: 400px;
+            height: 100%;
+            background: white;
+            z-index: 1001;
+            transition: right 0.3s ease;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-panel.open {
+            right: 0;
+        }
+
+        .cart-header {
+            padding: 25px;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-header h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #6b7280;
+        }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .cart-item-image {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #f3f4f6, #e5e7eb);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 1.5rem;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .cart-item-price {
+            color: #667eea;
+            font-weight: 700;
+        }
+
+        .cart-item-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quantity-btn {
+            background: #f3f4f6;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .quantity-btn:hover {
+            background: #e5e7eb;
+        }
+
+        .cart-total {
+            padding: 25px;
+            border-top: 1px solid #e5e7eb;
+            background: #f9fafb;
+        }
+
+        .total-amount {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #1f2937;
+            margin-bottom: 20px;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            background: linear-gradient(45deg, #10b981, #059669);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .checkout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+        }
+
+        .checkout-form {
+            display: none;
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .submit-btn {
+            background: linear-gradient(45deg, #10b981, #059669);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+        }
+
+        .back-btn {
+            background: #6b7280;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            margin-right: 15px;
+        }
+
+        .back-btn:hover {
+            background: #4b5563;
+        }
+
+        .order-summary {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+
+        .order-summary h3 {
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding: 5px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .summary-total {
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: #1f2937;
+            border-top: 2px solid #667eea;
+            padding-top: 10px;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cart-panel {
+                width: 100%;
+                right: -100%;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">NeoPotter</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="cart-btn" onclick="toggleCart()">
+                🛒 Cart <span class="cart-count">0</span>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <div id="home-section">
+            <div class="hero">
+                <h1>Premium 3D Printed Planters</h1>
+                <p>Transform your space with our modern, sustainable, and beautifully crafted 3D printed planters. Each piece is designed to bring nature and style together.</p>
+            </div>
+
+            <div class="products-grid" id="products">
+                <div class="product-card">
+                    <div class="product-image">🌱</div>
+                    <div class="product-info">
+                        <h3 class="product-title">Modern Geometric Planter</h3>
+                        <p class="product-description">Sleek hexagonal design perfect for succulents and small plants. Made from biodegradable PLA plastic.</p>
+                        <div class="product-price">₹299</div>
+                        <button class="add-to-cart" onclick="addToCart('Modern Geometric Planter', 299, '🌱')">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">🏺</div>
+                    <div class="product-info">
+                        <h3 class="product-title">Spiral Tower Planter</h3>
+                        <p class="product-description">Elegant spiral design with multiple tiers. Ideal for herbs and small flowering plants.</p>
+                        <div class="product-price">₹499</div>
+                        <button class="add-to-cart" onclick="addToCart('Spiral Tower Planter', 499, '🏺')">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">🪴</div>
+                    <div class="product-info">
+                        <h3 class="product-title">Minimalist Cube Planter</h3>
+                        <p class="product-description">Clean lines and modern aesthetic. Perfect for contemporary spaces and desk plants.</p>
+                        <div class="product-price">₹199</div>
+                        <button class="add-to-cart" onclick="addToCart('Minimalist Cube Planter', 199, '🪴')">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">🌿</div>
+                    <div class="product-info">
+                        <h3 class="product-title">Organic Wave Planter</h3>
+                        <p class="product-description">Flowing organic curves inspired by nature. Great for larger plants and statement pieces.</p>
+                        <div class="product-price">₹699</div>
+                        <button class="add-to-cart" onclick="addToCart('Organic Wave Planter', 699, '🌿')">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">🌵</div>
+                    <div class="product-info">
+                        <h3 class="product-title">Desert Cactus Planter</h3>
+                        <p class="product-description">Specially designed for cacti and succulents with excellent drainage system.</p>
+                        <div class="product-price">₹349</div>
+                        <button class="add-to-cart" onclick="addToCart('Desert Cactus Planter', 349, '🌵')">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">🌸</div>
+                    <div class="product-info">
+                        <h3 class="product-title">Hanging Garden Planter</h3>
+                        <p class="product-description">Suspended design with built-in hooks. Perfect for trailing plants and vertical gardens.</p>
+                        <div class="product-price">₹449</div>
+                        <button class="add-to-cart" onclick="addToCart('Hanging Garden Planter', 449, '🌸')">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="checkout-section" class="checkout-form">
+            <h2 style="text-align: center; margin-bottom: 30px; font-size: 2rem; color: #1f2937;">Complete Your Order</h2>
+            
+            <div class="order-summary">
+                <h3>Order Summary</h3>
+                <div id="order-items"></div>
+                <div class="summary-item summary-total">
+                    <span>Total:</span>
+                    <span id="order-total">₹0</span>
+                </div>
+            </div>
+
+            <form action="https://formsubmit.co/orders@neopotter.com" method="POST">
+                <input type="hidden" name="_subject" value="New Order from NeoPotter">
+                <input type="hidden" name="_next" value="https://neopotter.com/thank-you">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="order_items" id="order_items_input">
+                <input type="hidden" name="total_amount" id="total_amount_input">
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number *</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email (Optional)</label>
+                    <input type="email" id="email" name="email">
+                </div>
+
+                <div class="form-group">
+                    <label for="address">Complete Address *</label>
+                    <textarea id="address" name="address" rows="3" required></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="city">City *</label>
+                        <input type="text" id="city" name="city" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="pincode">Pin Code *</label>
+                        <input type="text" id="pincode" name="pincode" pattern="[0-9]{6}" required>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 15px; margin-top: 30px;">
+                    <button type="button" class="back-btn" onclick="goBackToShopping()">Back to Shopping</button>
+                    <button type="submit" class="submit-btn">Place Order</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <div class="cart-overlay" onclick="toggleCart()"></div>
+    <div class="cart-panel" id="cart-panel">
+        <div class="cart-header">
+            <h2>Your Cart</h2>
+            <button class="close-cart" onclick="toggleCart()">×</button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <p style="text-align: center; color: #6b7280; margin-top: 50px;">Your cart is empty</p>
+        </div>
+        <div class="cart-total">
+            <div class="total-amount">Total: ₹<span id="cart-total">0</span></div>
+            <button class="checkout-btn" onclick="proceedToCheckout()">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <script>
+        let cart = [];
+        let cartTotal = 0;
+
+        function addToCart(name, price, emoji) {
+            const existingItem = cart.find(item => item.name === name);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    name: name,
+                    price: price,
+                    emoji: emoji,
+                    quantity: 1
+                });
+            }
+            
+            updateCart();
+            
+            // Add animation feedback
+            const button = event.target;
+            button.style.background = '#10b981';
+            button.textContent = 'Added!';
+            setTimeout(() => {
+                button.style.background = 'linear-gradient(45deg, #667eea, #764ba2)';
+                button.textContent = 'Add to Cart';
+            }, 1000);
+        }
+
+        function updateCart() {
+            const cartCount = document.querySelector('.cart-count');
+            const cartItems = document.getElementById('cart-items');
+            const cartTotalElement = document.getElementById('cart-total');
+            
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartTotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            
+            cartCount.textContent = totalItems;
+            cartTotalElement.textContent = cartTotal;
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p style="text-align: center; color: #6b7280; margin-top: 50px;">Your cart is empty</p>';
+            } else {
+                cartItems.innerHTML = cart.map(item => `
+                    <div class="cart-item">
+                        <div class="cart-item-image">${item.emoji}</div>
+                        <div class="cart-item-info">
+                            <div class="cart-item-title">${item.name}</div>
+                            <div class="cart-item-price">₹${item.price}</div>
+                        </div>
+                        <div class="cart-item-controls">
+                            <button class="quantity-btn" onclick="changeQuantity('${item.name}', -1)">-</button>
+                            <span style="margin: 0 10px; font-weight: 600;">${item.quantity}</span>
+                            <button class="quantity-btn" onclick="changeQuantity('${item.name}', 1)">+</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function changeQuantity(name, delta) {
+            const item = cart.find(item => item.name === name);
+            if (item) {
+                item.quantity += delta;
+                if (item.quantity <= 0) {
+                    cart = cart.filter(cartItem => cartItem.name !== name);
+                }
+                updateCart();
+            }
+        }
+
+        function toggleCart() {
+            const overlay = document.querySelector('.cart-overlay');
+            const panel = document.getElementById('cart-panel');
+            
+            if (panel.classList.contains('open')) {
+                panel.classList.remove('open');
+                overlay.style.display = 'none';
+            } else {
+                panel.classList.add('open');
+                overlay.style.display = 'block';
+            }
+        }
+
+        function proceedToCheckout() {
+            if (cart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+            
+            // Hide home section and show checkout
+            document.getElementById('home-section').style.display = 'none';
+            document.getElementById('checkout-section').style.display = 'block';
+            
+            // Close cart panel
+            toggleCart();
+            
+            // Populate order summary
+            const orderItems = document.getElementById('order-items');
+            const orderTotal = document.getElementById('order-total');
+            
+            orderItems.innerHTML = cart.map(item => `
+                <div class="summary-item">
+                    <span>${item.name} × ${item.quantity}</span>
+                    <span>₹${item.price * item.quantity}</span>
+                </div>
+            `).join('');
+            
+            orderTotal.textContent = `₹${cartTotal}`;
+            
+            // Set hidden form fields
+            document.getElementById('order_items_input').value = cart.map(item => 
+                `${item.name} × ${item.quantity} = ₹${item.price * item.quantity}`
+            ).join('\n');
+            document.getElementById('total_amount_input').value = `₹${cartTotal}`;
+        }
+
+        function goBackToShopping() {
+            document.getElementById('home-section').style.display = 'block';
+            document.getElementById('checkout-section').style.display = 'none';
+        }
+
+        // Initialize cart
+        updateCart();
+    </script>
+</body>
+</html>
