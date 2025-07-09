@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Order Confirmation - NeoPotter</title>
+</head>
+<body>
+    <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+        
+        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0;">
+            <h1 style="margin: 0; font-size: 28px;">Thank You for Your Order!</h1>
+            <p style="margin: 10px 0 0 0; font-size: 16px;">We'll send you tracking information when the order ships.</p>
+        </div>
+
+        <div style="background: #f8f9fa; padding: 30px; border-radius: 0 0 10px 10px;">
+            <div style="background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                
+                <div style="text-align: center; margin-bottom: 30px;">
+                    <h2 style="color: #667eea; font-size: 24px; margin: 0;">Order #{{order_id}}</h2>
+                </div>
+
+                <div style="margin-bottom: 30px;">
+                    <h3 style="color: #333; font-size: 18px; margin-bottom: 15px; border-bottom: 2px solid #667eea; padding-bottom: 5px;">Order Details</h3>
+                    
+                    <div style="background: #f8f9fa; padding: 15px; border-radius: 5px; margin-bottom: 15px;">
+                        <pre style="font-family: Arial, sans-serif; margin: 0; white-space: pre-wrap;">{{order_items}}</pre>
+                    </div>
+                </div>
+
+                <div style="border-top: 1px solid #eee; padding-top: 20px;">
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <tr>
+                            <td style="padding: 8px 0; text-align: left; font-size: 16px;">Shipping</td>
+                            <td style="padding: 8px 0; text-align: right; font-size: 16px;">₹{{shipping_cost}}</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px 0; text-align: left; font-size: 16px;">Taxes</td>
+                            <td style="padding: 8px 0; text-align: right; font-size: 16px;">₹{{tax_amount}}</td>
+                        </tr>
+                        <tr style="border-top: 2px solid #667eea;">
+                            <td style="padding: 15px 0 0 0; text-align: left; font-size: 20px; font-weight: bold; color: #667eea;">Order Total</td>
+                            <td style="padding: 15px 0 0 0; text-align: right; font-size: 20px; font-weight: bold; color: #667eea;">₹{{total_amount}}</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
+                    <h3 style="color: #333; font-size: 18px; margin-bottom: 15px;">Shipping Address</h3>
+                    <div style="background: #f8f9fa; padding: 15px; border-radius: 5px; color: #666;">
+                        <strong>{{customer_name}}</strong><br>
+                        {{customer_address}}<br>
+                        Phone: {{customer_phone}}
+                    </div>
+                </div>
+
+                <div style="margin-top: 30px; padding: 20px; background: #e8f4f8; border-radius: 5px; border-left: 4px solid #667eea;">
+                    <h3 style="color: #667eea; margin-top: 0; font-size: 16px;">What's Next?</h3>
+                    <ul style="margin: 10px 0; padding-left: 20px; color: #666;">
+                        <li>You can expect to receive your package within 2-7 days</li>
+                        <li>Tracking details will be provided shortly</li>
+                        <li>We'll notify you when your order ships</li>
+                    </ul>
+                </div>
+
+                <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
+                    <p style="color: #666; font-size: 14px; margin: 0;">
+                        Best regards,<br>
+                        <strong style="color: #667eea;">NeoPotter Team</strong>
+                    </p>
+                </div>
+
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 20px; color: #999; font-size: 12px;">
+            <p>This is an automated message. Please do not reply to this email.</p>
+        </div>
+
+    </div>
+</body>
+</html>
