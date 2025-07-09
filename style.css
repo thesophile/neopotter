@@ -26,7 +26,7 @@
             padding: 20px 40px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
             position: sticky;
-            top: 20px;
+            top: 10px;
             z-index: 100;
         }
 
@@ -512,6 +512,7 @@
 
             main {
                 margin: 10px;
+                margin-top: 25px; /* Increased space between navbar and main content */
                 padding: 20px;
                 border-radius: 15px;
             }
@@ -625,6 +626,7 @@
 
             main {
                 margin: 5px;
+                margin-top: 20px; /* Increased space between navbar and main content on smaller screens */
                 padding: 15px;
             }
 
