@@ -33,64 +33,76 @@
 
             <div class="products-grid" id="products">
                 <div class="product-card">
-                    <div class="product-image">🌱</div>
+                    <div class="product-image">
+                        <img src="img/skull_pot.jpg" alt="Modern Geometric Planter">
+                    </div>
                     <div class="product-info">
                         <h3 class="product-title">Modern Geometric Planter</h3>
                         <p class="product-description">Sleek hexagonal design perfect for succulents and small plants. Made from biodegradable PLA plastic.</p>
                         <div class="product-price">₹299</div>
-                        <button class="add-to-cart" onclick="addToCart('Modern Geometric Planter', 299, '🌱')">Add to Cart</button>
+                        <button class="add-to-cart" onclick="addToCart('Modern Geometric Planter', 299, 'img/skull_pot.jpg')">Add to Cart</button>
                     </div>
                 </div>
 
                 <div class="product-card">
-                    <div class="product-image">🏺</div>
+                    <div class="product-image">
+                        <img src="img/turtle_planter.webp" alt="Spiral Tower Planter">
+                    </div>
                     <div class="product-info">
                         <h3 class="product-title">Spiral Tower Planter</h3>
                         <p class="product-description">Elegant spiral design with multiple tiers. Ideal for herbs and small flowering plants.</p>
                         <div class="product-price">₹499</div>
-                        <button class="add-to-cart" onclick="addToCart('Spiral Tower Planter', 499, '🏺')">Add to Cart</button>
+                        <button class="add-to-cart" onclick="addToCart('Spiral Tower Planter', 499, 'img/turtle_planter.webp')">Add to Cart</button>
                     </div>
                 </div>
 
                 <div class="product-card">
-                    <div class="product-image">🪴</div>
+                    <div class="product-image">
+                        <img src="img/cube-planter.jpg" alt="Minimalist Cube Planter">
+                    </div>
                     <div class="product-info">
                         <h3 class="product-title">Minimalist Cube Planter</h3>
                         <p class="product-description">Clean lines and modern aesthetic. Perfect for contemporary spaces and desk plants.</p>
                         <div class="product-price">₹199</div>
-                        <button class="add-to-cart" onclick="addToCart('Minimalist Cube Planter', 199, '🪴')">Add to Cart</button>
+                        <button class="add-to-cart" onclick="addToCart('Minimalist Cube Planter', 199, 'img/cube-planter.jpg')">Add to Cart</button>
                     </div>
                 </div>
 
                 <div class="product-card">
-                    <div class="product-image">🌿</div>
+                    <div class="product-image">
+                        <img src="img/wave-planter.jpg" alt="Organic Wave Planter">
+                    </div>
                     <div class="product-info">
                         <h3 class="product-title">Organic Wave Planter</h3>
                         <p class="product-description">Flowing organic curves inspired by nature. Great for larger plants and statement pieces.</p>
                         <div class="product-price">₹699</div>
-                        <button class="add-to-cart" onclick="addToCart('Organic Wave Planter', 699, '🌿')">Add to Cart</button>
+                        <button class="add-to-cart" onclick="addToCart('Organic Wave Planter', 699, 'img/wave-planter.jpg')">Add to Cart</button>
                     </div>
                 </div>
 
                 <div class="product-card">
-                    <div class="product-image">🌵</div>
+                    <div class="product-image">
+                        <img src="img/cactus-planter.jpg" alt="Desert Cactus Planter">
+                    </div>
                     <div class="product-info">
                         <h3 class="product-title">Desert Cactus Planter</h3>
                         <p class="product-description">Specially designed for cacti and succulents with excellent drainage system.</p>
                         <div class="product-price">₹349</div>
-                        <button class="add-to-cart" onclick="addToCart('Desert Cactus Planter', 349, '🌵')">Add to Cart</button>
+                        <button class="add-to-cart" onclick="addToCart('Desert Cactus Planter', 349, 'img/cactus-planter.jpg')">Add to Cart</button>
                     </div>
                 </div>
 
                 <div class="product-card">
-                    <div class="product-image">🌸</div>
+                    <div class="product-image">
+                        <img src="img/hanging-planter.jpg" alt="Hanging Garden Planter">
+                    </div>
                     <div class="product-info">
                         <h3 class="product-title">Hanging Garden Planter</h3>
                         <p class="product-description">Suspended design with built-in hooks. Perfect for trailing plants and vertical gardens.</p>
                         <div class="product-price">₹449</div>
-                        <button class="add-to-cart" onclick="addToCart('Hanging Garden Planter', 449, '🌸')">Add to Cart</button>
+                        <button class="add-to-cart" onclick="addToCart('Hanging Garden Planter', 449, 'img/hanging-planter.jpg')">Add to Cart</button>
                     </div>
-                </div>
+                </div>  
             </div>
         </div>
 
@@ -178,62 +190,95 @@
         let cart = [];
         let cartTotal = 0;
 
-        function addToCart(name, price, emoji) {
-            const existingItem = cart.find(item => item.name === name);
-            
-            if (existingItem) {
-                existingItem.quantity += 1;
-            } else {
-                cart.push({
-                    name: name,
-                    price: price,
-                    emoji: emoji,
-                    quantity: 1
-                });
-            }
-            
-            updateCart();
-            
-            // Add animation feedback
-            const button = event.target;
-            button.style.background = '#10b981';
-            button.textContent = 'Added!';
-            setTimeout(() => {
-                button.style.background = 'linear-gradient(45deg, #667eea, #764ba2)';
-                button.textContent = 'Add to Cart';
-            }, 1000);
-        }
+        // Updated addToCart function to handle image URLs
+function addToCart(name, price, imageUrl) {
+    const existingItem = cart.find(item => item.name === name);
+    
+    if (existingItem) {
+        existingItem.quantity += 1;
+    } else {
+        cart.push({
+            name: name,
+            price: price,
+            image: imageUrl,
+            quantity: 1
+        });
+    }
+    
+    updateCart();
+    
+    // Add animation feedback
+    const button = event.target;
+    button.style.background = '#10b981';
+    button.textContent = 'Added!';
+    setTimeout(() => {
+        button.style.background = 'linear-gradient(45deg, #667eea, #764ba2)';
+        button.textContent = 'Add to Cart';
+    }, 1000);
+}
 
-        function updateCart() {
-            const cartCount = document.querySelector('.cart-count');
-            const cartItems = document.getElementById('cart-items');
-            const cartTotalElement = document.getElementById('cart-total');
-            
-            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-            cartTotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            
-            cartCount.textContent = totalItems;
-            cartTotalElement.textContent = cartTotal;
-            
-            if (cart.length === 0) {
-                cartItems.innerHTML = '<p style="text-align: center; color: #6b7280; margin-top: 50px;">Your cart is empty</p>';
-            } else {
-                cartItems.innerHTML = cart.map(item => `
-                    <div class="cart-item">
-                        <div class="cart-item-image">${item.emoji}</div>
-                        <div class="cart-item-info">
-                            <div class="cart-item-title">${item.name}</div>
-                            <div class="cart-item-price">₹${item.price}</div>
-                        </div>
-                        <div class="cart-item-controls">
-                            <button class="quantity-btn" onclick="changeQuantity('${item.name}', -1)">-</button>
-                            <span style="margin: 0 10px; font-weight: 600;">${item.quantity}</span>
-                            <button class="quantity-btn" onclick="changeQuantity('${item.name}', 1)">+</button>
-                        </div>
-                    </div>
-                `).join('');
-            }
-        }
+// Updated updateCart function to display images
+// Updated updateCart function to properly display images in cart
+function updateCart() {
+    const cartCount = document.querySelector('.cart-count');
+    const cartItems = document.getElementById('cart-items');
+    const cartTotalElement = document.getElementById('cart-total');
+    
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    cartTotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    
+    cartCount.textContent = totalItems;
+    cartTotalElement.textContent = cartTotal;
+    
+    if (cart.length === 0) {
+        cartItems.innerHTML = '<p style="text-align: center; color: #6b7280; margin-top: 50px;">Your cart is empty</p>';
+    } else {
+        cartItems.innerHTML = cart.map(item => `
+            <div class="cart-item">
+                <div class="cart-item-image">
+                    <img src="${item.image}" alt="${item.name}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                </div>
+                <div class="cart-item-info">
+                    <div class="cart-item-title">${item.name}</div>
+                    <div class="cart-item-price">₹${item.price}</div>
+                </div>
+                <div class="cart-item-controls">
+                    <button class="quantity-btn" onclick="changeQuantity('${item.name}', -1)">-</button>
+                    <span style="margin: 0 10px; font-weight: 600;">${item.quantity}</span>
+                    <button class="quantity-btn" onclick="changeQuantity('${item.name}', 1)">+</button>
+                </div>
+            </div>
+        `).join('');
+    }
+}
+
+// Updated addToCart function - make sure it saves the image URL properly
+function addToCart(name, price, imageUrl) {
+    const existingItem = cart.find(item => item.name === name);
+    
+    if (existingItem) {
+        existingItem.quantity += 1;
+    } else {
+        cart.push({
+            name: name,
+            price: price,
+            image: imageUrl, // Make sure this is 'image' not 'emoji'
+            quantity: 1
+        });
+    }
+    
+    updateCart();
+    
+    // Add animation feedback
+    const button = event.target;
+    button.style.background = '#10b981';
+    button.textContent = 'Added!';
+    setTimeout(() => {
+        button.style.background = 'linear-gradient(45deg, #667eea, #764ba2)';
+        button.textContent = 'Add to Cart';
+    }, 1000);
+}
+
 
         function changeQuantity(name, delta) {
             const item = cart.find(item => item.name === name);

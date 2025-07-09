@@ -26,7 +26,7 @@
             padding: 20px 40px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
             position: sticky;
-            top: 10px;
+            top: 20px;
             z-index: 100;
         }
 
@@ -173,6 +173,7 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
         }
 
+                /* Updated product image styles */
         .product-image {
             width: 100%;
             height: 250px;
@@ -180,19 +181,51 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 4rem;
             position: relative;
             overflow: hidden;
+            border-radius: 20px 20px 0 0; /* Only round top corners */
         }
 
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* This ensures the image covers the entire container while maintaining aspect ratio */
+            object-position: center; /* Centers the image within the container */
+            transition: transform 0.3s ease;
+        }
+
+        .product-image:hover img {
+            transform: scale(1.05); /* Subtle zoom effect on hover */
+        }
+
+        /* Remove the gradient overlay since we're using real images now */
         .product-image::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            display: none;
+        }
+
+        /* Alternative styles if you want the image to fit entirely within the container */
+        .product-image.fit-contain img {
+            object-fit: contain; /* This will show the entire image within the container */
+            padding: 20px; /* Add some padding around the image */
+        }
+
+        /* For images that might be too small */
+        .product-image.fit-fill img {
+            object-fit: fill; /* This will stretch the image to fill the container exactly */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .product-image {
+                height: 200px; /* Slightly smaller on mobile */
+                border-radius: 15px 15px 0 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .product-image {
+                height: 180px; /* Even smaller on very small screens */
+            }
         }
 
         .product-info {
@@ -512,7 +545,6 @@
 
             main {
                 margin: 10px;
-                margin-top: 25px; /* Increased space between navbar and main content */
                 padding: 20px;
                 border-radius: 15px;
             }
@@ -626,7 +658,6 @@
 
             main {
                 margin: 5px;
-                margin-top: 20px; /* Increased space between navbar and main content on smaller screens */
                 padding: 15px;
             }
 
