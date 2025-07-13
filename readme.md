@@ -5,7 +5,10 @@ To log into emailjs, use the email abhinavbabu.contact@gmail.com.
 The email is hosted with zoho mail.
 The domain is provided with Dynadot.
 
-##Setup the "Email service" in emailjs
+## Note
+the file size of og image (thumbnail for whatsapp links) must be less than 300 kb.
+
+## Setup the "Email service" in emailjs
 1. Go to emailjs
 2. log in as abhinavbabu.contact@gmail.com
 3. Go to Email services >> add new service >> SMTP server
