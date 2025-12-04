@@ -1,3 +1,7 @@
+# Neopotter
+
+![screenshot](https://thesophile.github.io/neopotter/img/screenshot_neopotter.png)
+
 This is a simple static website.
 The order email is send to the admin(orders@neopotter.com) with Formsubmit.co.
 The confirmation email is sent with emailjs (reason: better formatting, Formsubmit autoresponse didn't work)
